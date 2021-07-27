@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 
 import Header from "../src/components/Header";
-import MainGrid from "../src/components/MainGrid";
+import PostGird from "../src/components/PostGrid";
 
-export default function Home() {
+export default function Post() {
   return (
     <Fragment>
       <Header />
-      <MainGrid />
+      <PostGird />
     </Fragment>
-  )
+  );
 }

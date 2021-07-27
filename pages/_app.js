@@ -1,16 +1,32 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  html {
+    font-size: 62.5%;
+    background: #f0f0f0;
+  }
+
+  body, input, button {
+    font-family: 'Roboto', sans-serif;
   }
 `
 
 const theme = {
   colors: {
-    primary: '#0070f3',
+    backgroundColor: '#f0f0f0',
+    backgroundColorSecondary: '#fff',
+    primary: '#FF7900',
+    secondary: '#0D1117',
+    textPrimaryColor: '#fafafa',
+    textSecondaryColor: '#4D6F80',
+    borderColor: 'rgba(0, 0, 0, .1)',
+    buttonColor: '#30363D',
   },
 }
 
