@@ -1,26 +1,53 @@
+import { useState } from 'react';
 import Card from '../Card';
 
 import { Container, Wrapper, Form } from './styles';
 
 export default function PostGird() {
-  async function getImages() {
-    const images = await fetch('http://localhost:3000/api/getImages')
-      .then(response => { return response.json() })
-      .then(response => { return response })
-      .catch(error => { return error.json() });
+  const [images, setImages] = useState([]);
+  const [loadingImages, setLoadingImages] = useState(false);
+  const [selectedImage, setSelectedImage] = useState();
 
-    console.log(images);
+  async function getImages() {
+    setLoadingImages(true);
+    setImages([]);
+
+    await fetch('http://localhost:3000/api/getImages')
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        setImages(response);
+        setLoadingImages(false);
+      })
+      .catch(error => {
+        return error.json()
+      });
   }
 
   return (
     <Container>
       <Wrapper>
-        <div style={{ gridArea: 'form' }}>
+        <div style={{ gridArea: 'form', overflowX: 'auto' }}>
           <Form>
-            <form>
+            <form onSubmit={e => e.preventDefault()}>
               <div className="input-group">
                 <span>Link do produto</span>
                 <input type="text" />
+
+                {loadingImages && <h5>Carregando...</h5>}
+
+                <div className="wrapper-images">
+                  { images.map((image, index) => (
+                    <img 
+                      key={index}
+                      src={image.src} 
+                      onClick={() => setSelectedImage(image)}
+                      className={image === selectedImage ? 'selected' : ''}
+                    />
+                  )) }
+                </div>
+
                 <button onClick={getImages}>Carregar Imagens</button>
               </div>
 

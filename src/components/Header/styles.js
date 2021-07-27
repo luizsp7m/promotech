@@ -48,6 +48,31 @@ export const Wrapper = styled.div`
     > button.create-btn {
       background: ${props => props.theme.colors.primary};
     }
+
+    > div.profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2rem;
+      cursor: pointer;
+      transition: opacity .25s;
+
+      &:hover {
+        opacity: .85;
+      }
+
+      > img {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 50%;
+      }
+
+      > span {
+        color: ${props => props.theme.colors.textPrimaryColor};
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+    }
   }
 
   @media(max-width: 425px) {

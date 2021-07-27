@@ -1,5 +1,7 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
+import { AuthContextProvider } from '../src/contexts/AuthContext';
+
 const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -32,11 +34,11 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <AuthContextProvider>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </AuthContextProvider>
   )
 }
