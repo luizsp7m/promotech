@@ -12,7 +12,7 @@ export default function PostGird() {
     setLoadingImages(true);
     setImages([]);
 
-    await fetch('http://localhost:3000/api/getImages')
+    await fetch('https://promotech.vercel.app/api/getImages')
       .then(response => {
         return response.json()
       })

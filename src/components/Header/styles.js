@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   > h4 {
     color: ${props => props.theme.colors.textPrimaryColor};
     font-size: 2.25rem;
+    cursor: pointer;
   }
 
   > div {

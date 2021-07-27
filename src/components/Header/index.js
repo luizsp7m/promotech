@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <Container>
       <Wrapper>
-        <h4>Promotech</h4>
+        <h4 onClick={() => router.push('/')}>Promotech</h4>
 
         <div>
           {!user && (
