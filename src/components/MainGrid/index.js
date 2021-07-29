@@ -3,7 +3,12 @@ import { Container, Wrapper } from "./styles";
 import Categories from '../Categories';
 import Card from "../Card";
 
+import { usePost } from '../../hooks/usePost';
+
 export default function MainGrid() {
+
+  const { postsFiltered, loadingPosts } = usePost();
+
   return (
     <Container>
       <Wrapper>
@@ -12,11 +17,14 @@ export default function MainGrid() {
         </div>
 
         <div>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          { !loadingPosts && (
+            postsFiltered.map(post => (
+              <Card
+                post={post}
+                key={post.id}
+              />
+            ))
+          ) }
         </div>
       </Wrapper>
     </Container>

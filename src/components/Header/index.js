@@ -3,13 +3,12 @@ import { Container, Wrapper } from "./styles";
 import { FcGoogle } from 'react-icons/fc';
 import { FaPlus } from 'react-icons/fa';
 
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuth } from '../../hooks/useAuth';
 
 import { useRouter } from 'next/router'
 
 export default function Header() {
-  const { signInWithGoogle, user } = useContext(AuthContext);
+  const { signInWithGoogle, user } = useAuth();
 
   const router = useRouter();
 

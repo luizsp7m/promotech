@@ -5,6 +5,7 @@ import Card from '../Card';
 import { Container, Wrapper, Form } from './styles';
 
 import { useCategory } from '../../hooks/useCategory';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function PostGird() {
   const [images, setImages] = useState([]);
@@ -17,7 +18,8 @@ export default function PostGird() {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
 
-  const { categories } = useCategory();
+  const { categories, loadingCategories } = useCategory();
+  const { user } = useAuth();
 
   async function getImages() {
     setLoadingImages(true);
@@ -47,7 +49,7 @@ export default function PostGird() {
       description: description,
       likes: '0',
       category: category,
-      user: '1234567890',
+      user: user.id,
     };
 
     fetch('/api/createPost', {
@@ -75,9 +77,9 @@ export default function PostGird() {
                   value={productLink}
                 />
 
-                {loadingImages && <h5>Carregando...</h5>}
+                {/* {loadingImages && <h5>Carregando...</h5>} */}
 
-                <div className="wrapper-images">
+                {/* <div className="wrapper-images">
                   {images.map((image, index) => (
                     <img
                       key={index}
@@ -86,25 +88,27 @@ export default function PostGird() {
                       className={image === selectedImage ? 'selected' : ''}
                     />
                   ))}
+                </div> */}
+
+                {/* <button onClick={getImages}>Carregar Imagens</button> */}
+              </div>
+
+              {!loadingCategories && (
+                <div className="input-group">
+                  <span>Categoria</span>
+
+                  <select
+                    onChange={event => setCategory(event.target.value)}
+                    value={category}
+                  >
+                    {categories.map(category => (
+                      <option value={category.id} key={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-
-                <button onClick={getImages}>Carregar Imagens</button>
-              </div>
-
-              <div className="input-group">
-                <span>Categoria</span>
-
-                <select
-                  onChange={event => setCategory(event.target.value)}
-                  value={category}
-                >
-                  {categories.map(category => (
-                    <option key={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              )}
 
               <div className="input-group">
                 <span>Título</span>
@@ -140,7 +144,7 @@ export default function PostGird() {
 
         <div>
           <h4>Pré-visualização</h4>
-          <Card />
+          {/* <Card /> */}
         </div>
       </Wrapper>
     </Container>

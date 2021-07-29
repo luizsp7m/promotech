@@ -2,22 +2,22 @@ import { Container, Image, About } from './styles';
 
 import { FiExternalLink } from 'react-icons/fi';
 
-export default function Card() {
+export default function Card({ post }) {
   return (
     <Container>
       <Image>
-        <img src="https://images1.kabum.com.br/produtos/fotos/129451/processador-amd-ryzen-9-5950x-cache-72mb-3-4ghz-4-9ghz-max-turbo-am4-100-100000065box_1602603581_gg.jpg" />
+        <img src={post.productImage} />
       </Image>
 
       <About>
-        <h5 className="title">Título da postagem</h5>
+        <h5 className="title">{post.title}</h5>
 
         <div>
-          <h4>R$ 50,00</h4>
+          <h4>R$ {post.price}</h4>
           <span>Vendido por <label>Amazon</label></span>
         </div>
 
-        <p>- Marca: AMD - Modelo: 100-100000065BOX</p>
+        <p>{post.description}</p>
 
         <div className="footer">
           <div className="user">
