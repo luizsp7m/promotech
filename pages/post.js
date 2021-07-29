@@ -11,7 +11,7 @@ export default function Post() {
   return (
     <Fragment>
       <Header />
-      <PostGird />
+      {/* <PostGird /> */}
     </Fragment>
   );
 }
