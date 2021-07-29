@@ -73,7 +73,7 @@ export const Form = styled.div`
         color: ${props => props.theme.colors.textSecondaryColor};
       }
 
-      > input {
+      > input, select {
         margin-top: 1rem;
         border: 1px solid ${props => props.theme.colors.borderColor};
         background: ${props => props.theme.colors.backgroundColor};

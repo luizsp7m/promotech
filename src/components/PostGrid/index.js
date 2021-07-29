@@ -1,12 +1,23 @@
 import { useState } from 'react';
+
 import Card from '../Card';
 
 import { Container, Wrapper, Form } from './styles';
+
+import { useCategory } from '../../hooks/useCategory';
 
 export default function PostGird() {
   const [images, setImages] = useState([]);
   const [loadingImages, setLoadingImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
+
+  const [productLink, setProductLink] = useState('');
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+
+  const { categories } = useCategory();
 
   async function getImages() {
     setLoadingImages(true);
@@ -25,27 +36,56 @@ export default function PostGird() {
       });
   }
 
+  function createPost(event) {
+    event.preventDefault();
+
+    const post = {
+      product_link: productLink,
+      product_image: 'https://images2.kabum.com.br/produtos/fotos/81132/81132_index_gg.jpg',
+      title: title,
+      price: price,
+      description: description,
+      likes: '0',
+      category: category,
+      user: '1234567890',
+    };
+
+    fetch('/api/createPost', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post)
+    }).then(response => {
+      alert('Criou');
+    })
+  }
+
   return (
     <Container>
       <Wrapper>
         <div style={{ gridArea: 'form', overflowX: 'auto' }}>
           <Form>
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={createPost}>
               <div className="input-group">
                 <span>Link do produto</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={event => setProductLink(event.target.value)}
+                  value={productLink}
+                />
 
                 {loadingImages && <h5>Carregando...</h5>}
 
                 <div className="wrapper-images">
-                  { images.map((image, index) => (
-                    <img 
+                  {images.map((image, index) => (
+                    <img
                       key={index}
-                      src={image.src} 
+                      src={image.src}
                       onClick={() => setSelectedImage(image)}
                       className={image === selectedImage ? 'selected' : ''}
                     />
-                  )) }
+                  ))}
                 </div>
 
                 <button onClick={getImages}>Carregar Imagens</button>
@@ -53,22 +93,44 @@ export default function PostGird() {
 
               <div className="input-group">
                 <span>Categoria</span>
-                <input type="text" />
+
+                <select
+                  onChange={event => setCategory(event.target.value)}
+                  value={category}
+                >
+                  {categories.map(category => (
+                    <option key={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="input-group">
                 <span>Título</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={event => setTitle(event.target.value)}
+                  value={title}
+                />
               </div>
 
               <div className="input-group">
                 <span>Preço</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={event => setPrice(event.target.value)}
+                  value={price}
+                />
               </div>
 
               <div className="input-group">
                 <span>Descrição</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={event => setDescription(event.target.value)}
+                  value={description}
+                />
               </div>
 
               <button type="submit">Enviar</button>

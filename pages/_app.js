@@ -1,6 +1,7 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import { AuthContextProvider } from '../src/contexts/AuthContext';
+import { CategoryContextProvider } from '../src/contexts/CategoryContext';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -35,10 +36,12 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <AuthContextProvider>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <CategoryContextProvider>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </CategoryContextProvider>
     </AuthContextProvider>
   )
 }
