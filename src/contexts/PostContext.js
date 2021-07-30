@@ -36,7 +36,7 @@ export function PostContextProvider({ children }) {
         'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        query: '{ allPosts { id productLink productImage title price description likes user category } }'
+        query: '{ allPosts { id productLink productImage title price description user category } }'
       }),
     }
     )

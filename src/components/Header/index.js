@@ -30,7 +30,7 @@ export default function Header() {
           )}
 
           {user && (
-            <div className="profile">
+            <div className="profile" onClick={() => router.push(`/profile/${user.id}`)}>
               <img src={user.avatar} />
               <span>{user.name}</span>
             </div>

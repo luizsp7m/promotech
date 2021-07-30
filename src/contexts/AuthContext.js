@@ -6,9 +6,12 @@ export const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
+  const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
+      setLoadingUser(true);
+
       if (user) {
         const { displayName, photoURL, uid } = user;
 
@@ -20,8 +23,10 @@ export function AuthContextProvider({ children }) {
           id: uid,
           name: displayName,
           avatar: photoURL
-        })
+        });
       }
+
+      setLoadingUser(false);
     })
 
     return () => {
@@ -30,6 +35,8 @@ export function AuthContextProvider({ children }) {
   }, []);
 
   async function signInWithGoogle() {
+    setLoadingUser(true);
+
     const provider = new firebase.auth.GoogleAuthProvider();
 
     const result = await auth.signInWithPopup(provider);
@@ -45,12 +52,14 @@ export function AuthContextProvider({ children }) {
         id: uid,
         name: displayName,
         avatar: photoURL
-      })
+      });
     }
+
+    setLoadingUser(false);
   }
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, loadingUser }}>
       {children}
     </AuthContext.Provider>
   )

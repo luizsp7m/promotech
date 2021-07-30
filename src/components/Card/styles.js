@@ -83,6 +83,7 @@ export const About = styled.div`
         font-size: 1.35rem;
         color: ${props => props.theme.colors.textSecondaryColor};
         cursor: pointer;
+        text-decoration: none;
 
         &:hover {
           text-decoration: underline;

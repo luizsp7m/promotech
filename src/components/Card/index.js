@@ -2,7 +2,11 @@ import { Container, Image, About } from './styles';
 
 import { FiExternalLink } from 'react-icons/fi';
 
+import { useRouter } from 'next/router';
+
 export default function Card({ post }) {
+  const router = useRouter();
+
   return (
     <Container>
       <Image>
@@ -21,8 +25,11 @@ export default function Card({ post }) {
 
         <div className="footer">
           <div className="user">
-            <img src="https://i.imgur.com/52qKUp1_d.webp?maxwidth=760&fidelity=grand" />
-            <span>Nome de quem postou</span>
+            <img src={post.user.avatar} />
+            <span 
+              href={`/profile/${post.user.id}`}
+              onClick={() => router.push(`/profile/${post.user.id}`)}
+            >{post.user.name}</span>
           </div>
 
           <button>

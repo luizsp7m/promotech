@@ -7,6 +7,8 @@ import { Container, Wrapper, Form } from './styles';
 import { useCategory } from '../../hooks/useCategory';
 import { useAuth } from '../../hooks/useAuth';
 
+import { useRouter } from 'next/router';
+
 export default function PostGird() {
   const [images, setImages] = useState([]);
   const [loadingImages, setLoadingImages] = useState(false);
@@ -20,6 +22,8 @@ export default function PostGird() {
 
   const { categories, loadingCategories } = useCategory();
   const { user } = useAuth();
+
+  const router = useRouter();
 
   async function getImages() {
     setLoadingImages(true);
@@ -47,9 +51,8 @@ export default function PostGird() {
       title: title,
       price: price,
       description: description,
-      likes: '0',
       category: category,
-      user: user.id,
+      user: JSON.stringify(user),
     };
 
     fetch('/api/createPost', {
@@ -59,8 +62,8 @@ export default function PostGird() {
       },
       body: JSON.stringify(post)
     }).then(response => {
-      alert('Criou');
-    })
+      router.push('/');
+    });
   }
 
   return (
