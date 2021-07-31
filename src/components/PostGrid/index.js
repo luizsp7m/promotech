@@ -6,6 +6,7 @@ import { Container, Wrapper, Form } from './styles';
 
 import { useCategory } from '../../hooks/useCategory';
 import { useAuth } from '../../hooks/useAuth';
+import { database } from '../../services/firebase';
 
 import { useRouter } from 'next/router';
 
@@ -42,28 +43,22 @@ export default function PostGird() {
       });
   }
 
-  function createPost(event) {
+  async function createPost(event) {
     event.preventDefault();
 
-    const post = {
-      product_link: productLink,
-      product_image: 'https://images2.kabum.com.br/produtos/fotos/81132/81132_index_gg.jpg',
+    const postRef = database.ref('posts');
+
+    const firebasePost = await postRef.push({
       title: title,
+      productLink: productLink,
+      productImage: 'https://images2.kabum.com.br/produtos/fotos/81132/81132_index_gg.jpg',
       price: price,
       description: description,
       category: category,
-      user: JSON.stringify(user),
-    };
-
-    fetch('/api/createPost', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(post)
-    }).then(response => {
-      router.push('/');
+      user: user,
     });
+
+    router.push('/');
   }
 
   return (

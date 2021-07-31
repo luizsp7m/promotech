@@ -1,10 +1,20 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import styled from 'styled-components';
 
 import Header from '../../src/components/Header';
 
 import { useAuth } from '../../src/hooks/useAuth';
+
+import { usePost } from '../../src/hooks/usePost';
+
+import Card from '../../src/components/Card';
+
+import MainGrid from '../../src/components/MainGrid';
+
+import { useRouter } from 'next/router';
+
+import { posts } from '../../src/hooks/usePost';
 
 const Container = styled.div`
   background-position: center;
@@ -40,22 +50,44 @@ const Wrapper = styled.div`
 `
 
 export default function Profile() {
-  const { user, loadingUser } = useAuth();
+  const router = useRouter();
+
+  const [userProfile, setUserProfile] = useState();
+  const [postCount, setPostCount] = useState(0);
+
+  const { posts } = usePost();
+
+  useEffect(() => {
+    posts.map(post => {
+      if(router.query.id === post.user.id) {
+        setUserProfile(post.user);
+      }
+    });
+  }, [posts]);
 
   return (
     <Fragment>
       <Header />
-      { !loadingUser && (
-        <Container>
-          <Wrapper>
-            <img src={user.avatar} />
+      { userProfile ? (
+        <>
+          <Container>
+            <Wrapper>
+              <img src={userProfile.avatar} />
 
-            <div>
-              <h5>{ user.name }</h5>
-              <span>5 publicações</span>
-            </div>
-          </Wrapper>
-        </Container>
+              <div>
+                <h5>{userProfile.name}</h5>
+                <span>{postCount} { postCount === 1 ? 'publicação' : 'publicações' }</span>
+              </div>
+            </Wrapper>
+          </Container>
+
+          <MainGrid user={router.query.id} />
+        </>
+      ) : (
+        <h3 style={{
+          padding: '2rem',
+          textAlign: 'center',
+        }}>Usuário não existe</h3>
       )}
     </Fragment>
   );

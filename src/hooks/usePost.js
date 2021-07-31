@@ -1,8 +1,22 @@
-import { useContext } from "react";
-import { PostContext } from "../contexts/PostContext";
+import { useEffect, useState } from 'react';
+import { database } from '../services/firebase';
 
 export function usePost() {
-  const value = useContext(PostContext);
+  const [posts, setPosts] = useState([]);
 
-  return value;
+  useEffect(() => {
+    const postRef = database.ref('posts');
+
+    postRef.on('value', snapshot => {
+      const data = snapshot.val();
+      const postList = [];
+      for (let id in data) {
+        postList.push({ id, ...data[id] });
+      }
+
+      setPosts(postList);
+    });
+  }, []);
+
+  return { posts };
 }
