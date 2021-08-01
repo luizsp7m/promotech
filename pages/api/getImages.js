@@ -1,7 +1,8 @@
+  
 const puppeteer = require('puppeteer');
 
 export default async function getImages(request, response)  {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto('https://www.kabum.com.br/cgi-local/site/produtos/descricao_ofertas.cgi?codigo=129451');
 

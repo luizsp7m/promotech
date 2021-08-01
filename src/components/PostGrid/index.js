@@ -10,8 +10,10 @@ import { database } from '../../services/firebase';
 
 import { useRouter } from 'next/router';
 
+import axios from 'axios';
+
 export default function PostGird() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState();
   const [loadingImages, setLoadingImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
 
@@ -22,25 +24,16 @@ export default function PostGird() {
   const [category, setCategory] = useState('');
 
   const { categories, loadingCategories } = useCategory();
+
   const { user } = useAuth();
 
   const router = useRouter();
 
   async function getImages() {
     setLoadingImages(true);
-    setImages([]);
-
-    await fetch('https://promotech.vercel.app/api/getImages')
-      .then(response => {
-        return response.json()
-      })
-      .then(response => {
-        setImages(response);
-        setLoadingImages(false);
-      })
-      .catch(error => {
-        return error.json()
-      });
+    const images = await axios.get('https://promotech.vercel.app/api/getImages');
+    setImages(images.data);
+    setLoadingImages(false);
   }
 
   async function createPost(event) {
@@ -75,20 +68,22 @@ export default function PostGird() {
                   value={productLink}
                 />
 
-                {/* {loadingImages && <h5>Carregando...</h5>} */}
+                { loadingImages && <h4>Carregando imagens</h4> }
 
-                {/* <div className="wrapper-images">
-                  {images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image.src}
-                      onClick={() => setSelectedImage(image)}
-                      className={image === selectedImage ? 'selected' : ''}
-                    />
-                  ))}
-                </div> */}
+                {images && (
+                  <div className="wrapper-images">
+                    {images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image.src}
+                        onClick={() => setSelectedImage(image)}
+                        className={image === selectedImage ? 'selected' : ''}
+                      />
+                    ))}
+                  </div>
+                )}
 
-                {/* <button onClick={getImages}>Carregar Imagens</button> */}
+                <span className="button" onClick={getImages}>Carregar Imagens</span>
               </div>
 
               {!loadingCategories && (

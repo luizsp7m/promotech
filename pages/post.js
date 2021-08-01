@@ -15,7 +15,6 @@ export default function Post() {
     if(!loadingUser && !user) {
       router.push('/');
     }
-    console.log(loadingUser, user);
   }, [loadingUser, user]);
 
   return (

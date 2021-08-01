@@ -84,7 +84,7 @@ export const Form = styled.div`
         height: 4.4rem;
       }
 
-      > button {
+      > span.button {
         width: 50%;
         margin-top: 1rem;
         padding: 1.55rem;
