@@ -9,6 +9,19 @@ export const Container = styled.div`
   padding: 2rem;
   gap: 3rem;
   align-items: center;
+
+  animation-duration: 1s;
+  animation-name: opacityIn;
+
+  @keyframes opacityIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Image = styled.div`
@@ -16,6 +29,11 @@ export const Image = styled.div`
     max-width: 16rem;
     object-fit: cover;
     border-radius: .5rem;
+    transition: transform .5s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
@@ -25,6 +43,12 @@ export const About = styled.div`
   > h5.title {
     color: ${props => props.theme.colors.textSecondaryColor};
     font-size: 1.7rem;
+    cursor: pointer;
+
+    max-width: 35ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   > div {
@@ -60,6 +84,11 @@ export const About = styled.div`
   > p {
     font-size: 1.35rem;
     color: ${props => props.theme.colors.textSecondaryColor};
+
+    max-width: 55ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   > div.footer {

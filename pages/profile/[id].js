@@ -57,12 +57,19 @@ export default function Profile() {
 
   const { posts } = usePost();
 
+  
+
   useEffect(() => {
+    let i = 0;
+
     posts.map(post => {
       if(router.query.id === post.user.id) {
         setUserProfile(post.user);
+        i = i + 1;
       }
     });
+
+    setPostCount(i);
   }, [posts]);
 
   return (

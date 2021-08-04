@@ -26,3 +26,23 @@ export const Container = styled.div`
     color: ${props => props.theme.colors.primary};
   }
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  > button {
+    padding: 1.25rem;
+    border-radius: .5rem;
+    border: 0;
+    background-color: ${props => props.theme.colors.primary};
+    color: #fafafa;
+    cursor: pointer;
+    transition: opacity .25s;
+
+    &:hover {
+      opacity: .95;
+    }
+  }
+`

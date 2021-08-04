@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { useCategory } from "../../hooks/useCategory";
-import { Container } from "./styles";
+import { Container, Wrapper } from "./styles";
 
 export default function Categories() {
   const {
@@ -11,7 +10,7 @@ export default function Categories() {
   } = useCategory();
 
   return (
-    <Fragment>
+    <Wrapper>
       { !loadingCategories && (
         <Container>
           { categories.map(category => (
@@ -25,6 +24,12 @@ export default function Categories() {
           ))}
         </Container>
       )}
-    </Fragment>
+
+      { selectedCategory && <button
+        onClick={() => setSelectedCategory()}
+      >
+        Remover filtro
+      </button>}
+    </Wrapper>
   )
 }

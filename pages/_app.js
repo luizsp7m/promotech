@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     background: #f0f0f0;
+    overflow-x: hidden;
   }
 
   body, input, button {
