@@ -6,7 +6,7 @@ import { Container, Wrapper, Form } from './styles';
 
 import { useCategory } from '../../hooks/useCategory';
 import { useAuth } from '../../hooks/useAuth';
-import { database } from '../../services/firebase';
+import { database, firebase } from '../../services/firebase';
 
 import { useRouter } from 'next/router';
 
@@ -15,13 +15,13 @@ import { validateURL } from '../../utils/utils';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function PostGird() {
-  const [productLink, setProductLink] = useState('');
-  const [productImage, setProductImage] = useState('');
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+export default function PostGird({ post }) {
+  const [productLink, setProductLink] = useState(post ? post.productLink : '');
+  const [productImage, setProductImage] = useState(post ? post.productImage : '');
+  const [title, setTitle] = useState(post ? post.title : '');
+  const [price, setPrice] = useState(post ? post.price : '');
+  const [description, setDescription] = useState(post ? post.description : '');
+  const [category, setCategory] = useState(post ? post.category : '');
 
   const { categories, loadingCategories } = useCategory();
 
@@ -35,6 +35,8 @@ export default function PostGird() {
       className: 'foo-bar'
     });
   }
+
+  console.log(post);
 
   const data = {
     title: title,
@@ -66,6 +68,20 @@ export default function PostGird() {
     router.push('/');
   }
 
+  async function updatePost(event) {
+    event.preventDefault();
+
+    if (!validateURL(productLink)) {
+      notify("Digite uma URL válida para o produto");
+      return;
+    }
+
+    if (!validateURL(productImage)) {
+      notify("Digite uma URL válida para a imagem");
+      return;
+    }
+  }
+
   useEffect(() => {
     if (!loadingCategories) {
       setCategory(categories[0].id);
@@ -78,7 +94,7 @@ export default function PostGird() {
       <Wrapper>
         <div style={{ gridArea: 'form', overflowX: 'auto' }}>
           <Form>
-            <form onSubmit={createPost}>
+            <form onSubmit={!post ? createPost : updatePost}>
               <div className="input-group">
                 <span>Produto URL</span>
                 <input
