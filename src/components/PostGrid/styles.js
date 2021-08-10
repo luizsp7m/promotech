@@ -34,6 +34,19 @@ export const Form = styled.div`
     flex-direction: column;
     gap: 2rem;
 
+    > span.delete {
+      color: #e74c3c;
+      font-size: 1.45rem;
+      font-weight: 500;
+      text-align: right;
+      cursor: pointer;
+      transition: opacity .25s;
+
+      &:hover {
+        opacity: 85%;
+      }
+    }
+
     > div.input-group {
       display: flex;
       flex-direction: column;

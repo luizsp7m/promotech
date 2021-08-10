@@ -36,8 +36,6 @@ export default function PostGird({ post }) {
     });
   }
 
-  console.log(post);
-
   const data = {
     title: title,
     productLink: productLink,
@@ -79,6 +77,19 @@ export default function PostGird({ post }) {
     if (!validateURL(productImage)) {
       notify("Digite uma URL válida para a imagem");
       return;
+    }
+
+    const firebasePost = await firebase.database().ref('posts/' + router.query.id).set(data);
+
+    router.push('/');
+  }
+
+  async function deletePost() {
+    const result = window.confirm("Realmente deseja excluir essa postagem?");
+
+    if (result) {
+      const firebasePost = await firebase.database().ref('posts/' + router.query.id).remove();
+      router.push('/');
     }
   }
 
@@ -163,6 +174,8 @@ export default function PostGird({ post }) {
                 />
               </div>
 
+              {post && <span className="delete" onClick={deletePost}>Excluir postagem</span>}
+
               <button type="submit">Enviar</button>
             </form>
           </Form>
@@ -170,7 +183,7 @@ export default function PostGird({ post }) {
 
         <div>
           <h4>Pré-visualização</h4>
-          { user && <Card post={data} page={'post'} /> }
+          {user && <Card post={data} page={'post'} />}
         </div>
       </Wrapper>
     </Container>

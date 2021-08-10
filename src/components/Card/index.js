@@ -6,11 +6,23 @@ import { useRouter } from 'next/router';
 
 import imgDefault from '../../assets/default.jpg';
 
+import { BsFillGearFill } from 'react-icons/bs';
+
+import { useAuth } from '../../hooks/useAuth';
+
 export default function Card({ post, page }) {
   const router = useRouter();
 
+  const { user } = useAuth();
+
   return (
     <Container>
+      {user && user.id === post.user.id && (
+        <BsFillGearFill className="config" size={16} color={'#b2bec3'} onClick={() => {
+          router.push(`/post/${post.id}`);
+        }} />
+      )}
+
       <Image>
         <img src={post.productImage ? post.productImage : imgDefault.src} />
       </Image>

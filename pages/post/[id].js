@@ -40,7 +40,7 @@ export default function Post({ post }) {
 }
 
 export async function getServerSideProps(context) {
-  let post;
+  let post = null;
 
   const postId = context.params.id;
 

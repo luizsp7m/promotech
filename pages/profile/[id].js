@@ -57,8 +57,6 @@ export default function Profile() {
 
   const { posts } = usePost();
 
-  
-
   useEffect(() => {
     let i = 0;
 

@@ -13,6 +13,20 @@ export const Container = styled.div`
   animation-duration: 1s;
   animation-name: opacityIn;
 
+  position: relative;
+
+  .config {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    transition: opacity .25s;
+
+    &:hover {
+      opacity: 85%;
+    }
+  }
+
   @keyframes opacityIn {
     from {
       opacity: 0;
