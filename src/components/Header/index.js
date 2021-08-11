@@ -8,9 +8,11 @@ import { useAuth } from '../../hooks/useAuth';
 import { useRouter } from 'next/router'
 
 export default function Header() {
-  const { signInWithGoogle, user } = useAuth();
+  const { signInWithGoogle, user, signOut } = useAuth();
 
   const router = useRouter();
+
+  console.log(user);
 
   function createNewPost() {
     router.push('/post');
@@ -30,10 +32,14 @@ export default function Header() {
           )}
 
           {user && (
-            <div className="profile" onClick={() => router.push(`/profile/${user.id}`)}>
-              <img src={user.avatar} />
-              <span>{user.name}</span>
-            </div>
+            <>
+              <div className="profile" onClick={() => router.push(`/profile/${user.id}`)}>
+                <img src={user.avatar} />
+                <span>{user.name}</span>
+              </div>
+
+              <span className="signout" onClick={signOut}>Sair</span>
+            </>
           )}
 
           <button className="create-btn" onClick={createNewPost}>

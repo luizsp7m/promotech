@@ -50,11 +50,25 @@ export const Wrapper = styled.div`
       background: ${props => props.theme.colors.primary};
     }
 
+    > span.signout {
+      color: red;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      color: ${props => props.theme.colors.textPrimaryColor};
+      cursor: pointer;
+      transition: opacity .25s;
+
+      &:hover {
+        opacity: .85;
+      }
+    }
+
     > div.profile {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0 2rem;
       cursor: pointer;
       transition: opacity .25s;
 

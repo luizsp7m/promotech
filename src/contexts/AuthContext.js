@@ -2,12 +2,14 @@ import { createContext, useEffect, useState } from 'react';
 
 import { firebase, auth } from '../services/firebase';
 
+import Router from 'next/router'
+
 export const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
   const [loadingUser, setLoadingUser] = useState(true);
-
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setLoadingUser(true);
@@ -58,8 +60,13 @@ export function AuthContextProvider({ children }) {
     setLoadingUser(false);
   }
 
+  async function signOut() {
+    firebase.auth().signOut();
+    Router.reload(window.location.pathname);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, loadingUser }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, loadingUser, signOut }}>
       {children}
     </AuthContext.Provider>
   )
