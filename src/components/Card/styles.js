@@ -125,7 +125,7 @@ export const About = styled.div`
       }
     }
 
-    > button {
+    > button, a {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -138,6 +138,7 @@ export const About = styled.div`
       font-size: 1.35rem;
       cursor: pointer;
       transition: opacity .25s;
+      text-decoration: none;
 
       &:hover {
         opacity: .85;

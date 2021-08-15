@@ -55,10 +55,10 @@ export default function Card({ post, page }) {
               <span>Pegar promoção</span>
             </button>
           ) : (
-            <button>
+            <a href={post.productLink} target="_blank">
               <FiExternalLink size={'16'} />
               <span>Pegar promoção</span>
-            </button>
+            </a>
           )}
         </div>
       </About>
