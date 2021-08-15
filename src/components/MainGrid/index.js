@@ -13,7 +13,7 @@ export default function MainGrid({ user }) {
   return (
     <Container>
       <Wrapper>
-        <div style={{ gridArea: 'categories' }}>
+        <div>
           <Categories />
         </div>
 

@@ -10,9 +10,9 @@ export const Wrapper = styled.div`
   margin: 3rem auto;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 5fr;
   gap: 2rem;
-  grid-template-areas: "form preview";
+  
 
   > div {
     > h4 {
@@ -20,6 +20,10 @@ export const Wrapper = styled.div`
       margin-bottom: 1rem;
       font-size: 1.5rem;
     }
+  }
+
+  @media(max-width: 1072px) {
+    grid-template-columns: 1fr;
   }
 `;
 

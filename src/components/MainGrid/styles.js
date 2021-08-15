@@ -12,11 +12,14 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 250px 1fr 250px;
   gap: 2rem;
-  grid-template-areas: "categories posts .";
 
   > div:nth-child(2) {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  @media(max-width: 1024px) {
+    grid-template-columns: 1fr;
   }
 `;

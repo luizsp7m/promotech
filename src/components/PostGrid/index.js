@@ -93,6 +93,10 @@ export default function PostGird({ post }) {
     }
   }
 
+  if(!user) {
+    return;
+  }
+
   useEffect(() => {
     if (!loadingCategories) {
       setCategory(categories[0].id);
@@ -103,7 +107,7 @@ export default function PostGird({ post }) {
     <Container>
       <ToastContainer style={{ fontSize: '1.4rem' }} />
       <Wrapper>
-        <div style={{ gridArea: 'form', overflowX: 'auto' }}>
+        <div style={{ overflowX: 'auto' }}>
           <Form>
             <form onSubmit={!post ? createPost : updatePost}>
               <div className="input-group">

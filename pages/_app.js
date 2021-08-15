@@ -19,6 +19,18 @@ const GlobalStyle = createGlobalStyle`
   body, input, button {
     font-family: 'Roboto', sans-serif;
   }
+
+  @media(max-width: 768px) {
+    html {
+      font-size: 56.25%;
+    }
+  }
+
+  @media(max-width: 515px) {
+    html {
+      font-size: 50%;
+    }
+  }
 `
 
 const theme = {

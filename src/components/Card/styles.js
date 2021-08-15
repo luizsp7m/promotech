@@ -10,10 +10,11 @@ export const Container = styled.div`
   gap: 3rem;
   align-items: center;
 
-  animation-duration: 1s;
-  animation-name: opacityIn;
-
   position: relative;
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+  }
 
   .config {
     position: absolute;
@@ -24,16 +25,6 @@ export const Container = styled.div`
 
     &:hover {
       opacity: 85%;
-    }
-  }
-
-  @keyframes opacityIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
     }
   }
 `;
@@ -155,6 +146,12 @@ export const About = styled.div`
       > span {
 
       }
+    }
+  }
+
+  @media(max-width: 515px) {
+    > p {
+      max-width: 30ch;
     }
   }
 `;

@@ -17,7 +17,7 @@ export default function Card({ post, page }) {
 
   return (
     <Container>
-      {user && user.id === post.user.id && (
+      {user && page !== 'post' && user.id === post.user.id && (
         <BsFillGearFill className="config" size={16} color={'#b2bec3'} onClick={() => {
           router.push(`/post/${post.id}`);
         }} />
