@@ -3,6 +3,29 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { AuthContextProvider } from '../src/contexts/AuthContext';
 import { CategoryContextProvider } from '../src/contexts/CategoryContext';
 
+import { Router } from 'next/dist/client/router';
+
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+NProgress.configure({
+  showSpinner: false,
+  trickleRate: 0.1,
+  trickleSpeed: 300,
+});
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done();
+});
+
 const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -18,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
 
   body, input, button {
     font-family: 'Roboto', sans-serif;
+  }
+
+  #nprogress .bar {
+    background: #FF7900 !important;
   }
 
   @media(max-width: 768px) {

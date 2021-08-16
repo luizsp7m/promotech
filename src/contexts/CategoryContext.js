@@ -29,7 +29,7 @@ export function CategoryContextProvider({ children }) {
         setLoadingCategories(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(`Category Error: ${error}`);
       });
   }
 

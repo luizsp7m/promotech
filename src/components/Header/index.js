@@ -12,8 +12,6 @@ export default function Header() {
 
   const router = useRouter();
 
-  console.log(user);
-
   function createNewPost() {
     router.push('/post');
   }

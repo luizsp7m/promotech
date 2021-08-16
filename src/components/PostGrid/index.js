@@ -93,10 +93,6 @@ export default function PostGird({ post }) {
     }
   }
 
-  if(!user) {
-    return;
-  }
-
   useEffect(() => {
     if (!loadingCategories) {
       setCategory(categories[0].id);
