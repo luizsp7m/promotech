@@ -1,6 +1,6 @@
 # Promotech
 
-##### [Site URL](https://planets-fact-theta.vercel.app/)
+##### [Site URL](https://promotech.vercel.app/)
 
 A aplicação é uma versão reduzida do [Pelando](https://www.pelando.com.br/) com o objetivo de praticar NextJS.
 ####
