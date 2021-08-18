@@ -37,13 +37,13 @@ export default function Header() {
               </div>
 
               <span className="signout" onClick={signOut}>Sair</span>
+
+              <button className="create-btn" onClick={createNewPost}>
+                <FaPlus size={'14'} />
+                <span>Enviar</span>
+              </button>
             </>
           )}
-
-          <button className="create-btn" onClick={createNewPost}>
-            <FaPlus size={'14'} />
-            <span>Enviar</span>
-          </button>
         </div>
       </Wrapper>
     </Container>
