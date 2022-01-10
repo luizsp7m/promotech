@@ -6,7 +6,7 @@ A aplicação é uma versão reduzida do [Pelando](https://www.pelando.com.br/) 
 ####
 O Pelando é um Social Commerce movimentado por seus usuários que participam compartilhando as melhores promoções de lojas físicas ou virtuais, assim como seus conhecimentos sobre produtos e experiências de compra.
 ####
-![](https://raw.githubusercontent.com/luizsp7m/promotech/main/design/preview.gif)
+![](./public/design/preview.gif)
 
 ### Sobre a aplicação :man_technologist:
 
