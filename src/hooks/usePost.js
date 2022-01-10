@@ -14,7 +14,7 @@ export function usePost() {
         postList.push({ id, ...data[id] });
       }
 
-      setPosts(postList);
+      setPosts(postList.reverse());
     });
   }, []);
 

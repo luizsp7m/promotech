@@ -1,7 +1,7 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
-import { AuthContextProvider } from '../src/contexts/AuthContext';
-import { CategoryContextProvider } from '../src/contexts/CategoryContext';
+import { AuthContextProvider } from '../contexts/AuthContext';
+import { CategoryContextProvider } from '../contexts/CategoryContext';
 
 import { Router } from 'next/dist/client/router';
 

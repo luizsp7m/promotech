@@ -1,12 +1,14 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 
-import { database } from '../../src/services/firebase';
+import { database } from '../../services/firebase';
 
-import { AuthContext } from '../../src/contexts/AuthContext';
+import Head from "next/head";
 
-import Header from "../../src/components/Header";
-import PostGird from "../../src/components/PostGrid";
+import { AuthContext } from '../../contexts/AuthContext';
+
+import Header from "../../components/Header";
+import PostGird from "../../components/PostGrid";
 
 export default function Post() {
   const router = useRouter();
@@ -42,6 +44,10 @@ export default function Post() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Promotech | Atualizar produto</title>
+      </Head>
+
       <Header />
       {post && <PostGird post={post} />}
     </Fragment>

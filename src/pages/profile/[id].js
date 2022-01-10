@@ -2,24 +2,27 @@ import { Fragment, useEffect, useState } from "react";
 
 import styled from 'styled-components';
 
-import Header from '../../src/components/Header';
+import Header from '../../components/Header';
 
-import { useAuth } from '../../src/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
-import { usePost } from '../../src/hooks/usePost';
+import { usePost } from '../../hooks/usePost';
 
-import Card from '../../src/components/Card';
+import Card from '../../components/Card';
 
-import MainGrid from '../../src/components/MainGrid';
+import MainGrid from '../../components/MainGrid';
 
 import { useRouter } from 'next/router';
 
-import { posts } from '../../src/hooks/usePost';
+import Head from "next/head";
+
+import { posts } from '../../hooks/usePost';
 
 const Container = styled.div`
   background-position: center;
   background-size: cover;
-  background-image: url("https://images.wallpaperscraft.com/image/hologram_scheme_scifi_139294_1920x1080.jpg");
+  background-image: url("/assets/hologram.jpg");
+  padding: 2rem 0;
 `
 
 const Wrapper = styled.div`
@@ -61,7 +64,7 @@ export default function Profile() {
     let i = 0;
 
     posts.map(post => {
-      if(router.query.id === post.user.id) {
+      if (router.query.id === post.user.id) {
         setUserProfile(post.user);
         i = i + 1;
       }
@@ -72,16 +75,23 @@ export default function Profile() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Promotech | Carregando...</title>
+      </Head>
+
       <Header />
-      { userProfile ? (
+      {userProfile ? (
         <>
+          <Head>
+            <title>Promotech | {userProfile.name}</title>
+          </Head>
           <Container>
             <Wrapper>
               <img src={userProfile.avatar} />
 
               <div>
                 <h5>{userProfile.name}</h5>
-                <span>{postCount} { postCount === 1 ? 'publicação' : 'publicações' }</span>
+                <span>{postCount} {postCount === 1 ? 'publicação' : 'publicações'}</span>
               </div>
             </Wrapper>
           </Container>

@@ -4,8 +4,6 @@ import { FiExternalLink } from 'react-icons/fi';
 
 import { useRouter } from 'next/router';
 
-import imgDefault from '../../assets/default.jpg';
-
 import { BsFillGearFill } from 'react-icons/bs';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -24,7 +22,7 @@ export default function Card({ post, page }) {
       )}
 
       <Image>
-        <img src={post.productImage ? post.productImage : imgDefault.src} />
+        <img src={post.productImage ? post.productImage : "/assets/default.jpg"} />
       </Image>
 
       <About>
